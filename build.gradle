@@ -1,0 +1,90 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+
+group = gradle.projectGroupId
+version = gradle.projectVersion
+
+
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile "org.springframework.restdocs:spring-restdocs-mockmvc:1.1.2.RELEASE"
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+def ossrhUsername = System.getenv("ossrhUsername") ?: ossrhUsername
+def ossrhPassword = System.getenv("ossrhPassword") ?: ossrhPassword
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'com.github.greatermkemeetup:spring-restdocs-postman'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A Spring REST Docs extension that produces importable Postman collections.'
+                url 'https://github.com/GreaterMKEMeetup/spring-restdocs-postman'
+
+                scm {
+                    connection 'scm:git:git://github.com/GreaterMKEMeetup/spring-restdocs-postman.git'
+                    developerConnection 'scm:git:ssh://github.com:GreaterMKEMeetup/spring-restdocs-postman.git'
+                    url 'https://github.com/GreaterMKEMeetup/spring-restdocs-postman'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'aglassman'
+                        name 'Andrew Glassman'
+                        email 'andrew.glassman@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+build.dependsOn install

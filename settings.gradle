@@ -1,0 +1,3 @@
+rootProject.name = 'spring-restdocs-postman'
+gradle.ext.projectGroupId = 'com.github.greatermkemeetup'
+gradle.ext.projectVersion = '0.0.1'
