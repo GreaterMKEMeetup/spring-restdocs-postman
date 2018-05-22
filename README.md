@@ -107,7 +107,11 @@ public void getUsersByUsernameAndCompany() {
 }
 ```
 
+Results in:
 ![Example Request - Use Tempalted Path = false](/images/example-request-useTemplatedPath-false.png?raw=true "Example Request - Use Tempalted Path = false")
+
+Rather than:
+![Example Request - Use Tempalted Path = true](/images/example-request-useTemplatedPath-true.png?raw=true "Example Request - Use Tempalted Path = true")
 
 ## Output
 
