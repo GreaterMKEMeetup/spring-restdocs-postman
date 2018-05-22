@@ -30,6 +30,15 @@ Use the PostmanSnippet class to generate Postman collection items.  You can cust
 
 ```java
 
+import static org.gmjm.springrestdocspostman.PostmanSnippet.*;
+
+...
+
+@Test
+public void getUsersByUsernameAndCompany() {
+    
+    ...
+    
 	HttpHeaders headers = new HttpHeaders();
 	headers.put("Authorization", Arrays.asList("Bearer: token"));
 
@@ -43,9 +52,10 @@ Use the PostmanSnippet class to generate Postman collection items.  You can cust
 		.andExpect(status().isOk())
 		.andDo(postmanImport("By Username and Company"))
 		.andReturn();
+}
 ```
 
-This will generate the following JSON at ```$buildDir/postman-snippets/GET-By Username and Company.json```:
+This are generate the following JSON at ```$buildDir/postman-snippets/GET-By Username and Company.json```:
 
 ```json
 {
@@ -79,13 +89,13 @@ This will generate the following JSON at ```$buildDir/postman-snippets/GET-By Us
 }
 ```
  
- This will look like the following in Postman:
+ This like the following in Postman:
 ![Example Request](/images/example-request.png?raw=true "Example Request")
 
 
 ## Output
 
-Snippets will be staged in the path ```build/postman-snippets/${folder}``` where _folder_ is the last directory
+Snippets are staged in the path ```build/postman-snippets/${folder}``` where _folder_ is the last directory
 of the path configured for the default rest documentation output.
 
 For example, a JUnitRestDocumentation configured for ```build/generated-snippets/users``` would result in postman
@@ -106,12 +116,13 @@ task generatePostmanCollection(type: JavaExec) {
 }
 ```
 
-The task will traverse the ```postman-snippets``` directory, and assemble all the snippets in each sub-directory
+The task traverses the ```postman-snippets``` directory, and assemble all the snippets in each sub-directory
 into a sub-collection.
 
-Finally, the collection export will be saved to ```$buildDir/postman/postman-collection-${version}.json```.
+Finally, the collection export is saved to ```$buildDir/postman/postman-collection-${version}.json```.
 
 [Import this collection into your Postman app](https://www.getpostman.com/docs/v6/postman/collections/data_formats).
 
-This will result in:
+The final result:
+
 ![Example Collection](/images/example-collection.png?raw=true "Example Collection")
