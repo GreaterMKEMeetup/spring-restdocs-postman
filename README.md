@@ -125,4 +125,4 @@ Finally, the collection export is saved to ```$buildDir/postman/postman-collecti
 
 The final result:
 
-![Example Collection](/images/example-collection.png?raw=true "Example Collection")
+![Example Collection](/images/example-collection-1.png?raw=true "Example Collection")
