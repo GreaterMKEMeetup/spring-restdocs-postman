@@ -546,8 +546,6 @@ public class PostmanSnippet implements Snippet {
                 continue;
             } else if (headerName.equalsIgnoreCase("Authorization")) {
                 header.value = "Bearer: {{token}}";
-            } else if (headerName.equalsIgnoreCase("DM-ORG-CONTEXT")) {
-                header.value = "{{orgContext}}";
             } else {
                 header.value = requestHeader.getValue().toString();
             }
