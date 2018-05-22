@@ -82,6 +82,7 @@ By default, the generator assumes that PathVariables should be Postman variables
 If you'd like to skip using variables in the request URL, and use what was used as the URL in the test,
 you can call _postmanImport_ as follows:
 
+```java
 @Test
 public void getUsersByUsernameAndCompany() {
     
@@ -107,7 +108,6 @@ public void getUsersByUsernameAndCompany() {
 ```
 
 ![Example Request - Use Tempalted Path = false](/images/example-request-useTemplatedPath-false.png?raw=true "Example Request - Use Tempalted Path = false")
-
 
 ## Output
 
