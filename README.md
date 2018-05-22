@@ -47,7 +47,7 @@ public void getUsersByUsernameAndCompany() {
 		    get("/users")
 			.param("username","gobBluth")
 			.param("company","Bluth Company")
-			.headers(validClientAdmin)
+			.headers(headers)
 			.accept(WebConfig.Constants.PRODUCES_HAL))
 		.andExpect(status().isOk())
 		.andDo(postmanImport("By Username and Company"))
@@ -55,42 +55,58 @@ public void getUsersByUsernameAndCompany() {
 }
 ```
 
-This are generate the following JSON at ```$buildDir/postman-snippets/GET-By Username and Company.json```:
+The PostmanSnippet class generates and saves a JSON file at ```$buildDir/postman-snippets/users/GET-By Username and Company.json```:
 
-```json
-{
-	"name": "By Username and Company",
-	"description": null,
-	"item": null,
-	"request": {
-		"url": "{{protocol}}://{{host}}/users?username={{username}}&company={{company}}",
-		"method": "GET",
-		"description": null,
-		"header": [
-			{
-				"key": "Authorization",
-				"value": "Bearer: {{token}}",
-				"description": null
-			},
-			{
-				"key": "Accept",
-				"value": "application/hal+json",
-				"description": null
-			}
-		],
-		"body": {
-			"mode": "raw",
-			"raw": "",
-			"urlEncoded": null,
-			"formdata": null
-		}
-	},
-	"response": null
+How the request appears in Postman:
+![Example Request](/images/example-request.png?raw=true "Example Request")
+
+The PostmanSnippet class defaults to using [Postman Variables](https://www.getpostman.com/docs/v6/postman/environments_and_globals/variables) to keep the output as flexible, and reusable as possible.
+
+## Customizing Output
+### Non Variable Parameters
+In some cases, you may not want a path, or query parameter to be a variable in the postman request.
+To exclude particular parameters from becoming variables, use the following syntax:
+
+```java
+	...
+	.andDo(postmanImport("By Username and Company", "company", "username"))
+```
+
+![Example Request - Non Variable Parameters](/images/example-request-nonVariableParameters.png?raw=true "Example Request - Non Variable Parameters")
+
+### Non Templated Path
+By default, the generator assumes that PathVariables should be Postman variables.  For example
+
+```/users/{userId}/address``` is transformed to ```/users/{{userId}}/address```
+
+If you'd like to skip using variables in the request URL, and use what was used as the URL in the test,
+you can call _postmanImport_ as follows:
+
+@Test
+public void getUsersByUsernameAndCompany() {
+    
+    ...
+    
+	HttpHeaders headers = new HttpHeaders();
+	headers.put("Authorization", Arrays.asList("Bearer: token"));
+
+	mockMvc
+		.perform(
+		    get("/users/gobBluth/address")
+		    .param("projection","slim")
+			.headers(headers)
+			.accept(WebConfig.Constants.PRODUCES_HAL))
+		.andExpect(status().isOk())
+		.andDo(
+			postmanImport(
+				new PostmanSnippet("Slim Address By Username")
+					.setNonVariableParameters("projection")
+					.useTemplatedPath(false))
+		.andReturn();
 }
 ```
- 
- This like the following in Postman:
-![Example Request](/images/example-request.png?raw=true "Example Request")
+
+![Example Request - Use Tempalted Path = false](/images/example-request-useTemplatedPath-false.png?raw=true "Example Request - Use Tempalted Path = false")
 
 
 ## Output
