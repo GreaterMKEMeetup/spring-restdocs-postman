@@ -17,7 +17,10 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.restdocs:spring-restdocs-mockmvc:1.1.2.RELEASE"
+    compile "org.springframework.restdocs:spring-restdocs-mockmvc:2.0.1.RELEASE"
+
+    testCompile("org.springframework.boot:spring-boot-starter-web:1.5.17.RELEASE")
+    testCompile('org.springframework.boot:spring-boot-starter-test:1.5.17.RELEASE')
 }
 
 task javadocJar(type: Jar) {

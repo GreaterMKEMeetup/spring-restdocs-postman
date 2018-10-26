@@ -1,4 +1,4 @@
-package org.gmjm.springrestdocspostman;
+package com.example.code;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.nio.file.Files.*;
-import static org.gmjm.springrestdocspostman.PostmanSnippet.*;
+import static com.example.code.PostmanSnippet.*;
 
 public class PostmanCollectionGenerator {
 
