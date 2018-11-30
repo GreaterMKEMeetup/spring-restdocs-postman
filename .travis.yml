@@ -1,0 +1,21 @@
+language: java
+jdk:
+- oraclejdk8
+
+install:
+- true
+
+stages:
+- test
+- name: deploy
+  if: branch =~ ^draft OR tag =~ ^v
+
+jobs:
+  include:
+  - stage: test
+    script: ./gradlew test -x signArchives
+  - stage: deploy
+    script:
+    - openssl aes-256-cbc -K $encrypted_f27c25e9ddd8_key -iv $encrypted_f27c25e9ddd8_iv -in oss_secring.gpg.enc -out oss_secring.gpg -d
+    - ./gradlew uploadArchives
+
