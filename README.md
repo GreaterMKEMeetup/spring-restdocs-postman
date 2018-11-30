@@ -12,7 +12,7 @@ A Spring Restdoc Snippet implementation that produces importable Postman collect
 ```
 ### Gradle
 ```groovy
-compile 'com.github.greatermkemeetup:spring-restdocs-postman:0.0.1'
+compile 'com.github.greatermkemeetup:spring-restdocs-postman:0.0.2'
 ```
 
 ## Overview
