@@ -13,7 +13,9 @@ jobs:
     script: "./gradlew test -x signArchives"
   - stage: deploy
     script:
-    - openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv
-      -in oss_secring.gpg.enc -out oss_secring.gpg -d
     - "./gradlew uploadArchives"
-
+before_install:
+- openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv
+  -in oss_secring.gpg.enc -out ~\/.gnupg/oss_secring.gpg -d
+- openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv
+  -in oss_secring.gpg.enc -out oss_secring.gpg -d
