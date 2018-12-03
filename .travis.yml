@@ -14,8 +14,8 @@ jobs:
   include:
   - stage: test
     script:
-      - echo $SIGNING_KEY_ID
-      - echo $SIGNING_KEY_PATH
+      - echo "SIGNING_KEY_ID:$SIGNING_KEY_ID"
+      - echo "SIGNING_KEY_PATH:$SIGNING_KEY_PATH"
       - ./gradlew test -x signArchives
   - stage: deploy
     script:
