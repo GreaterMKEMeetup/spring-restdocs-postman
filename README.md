@@ -7,7 +7,7 @@ A Spring Restdoc Snippet implementation that produces importable Postman collect
 <dependency>
     <groupId>com.github.greatermkemeetup</groupId>
     <artifactId>spring-restdocs-postman</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 ### Gradle
