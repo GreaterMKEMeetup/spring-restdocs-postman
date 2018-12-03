@@ -1,7 +1,7 @@
 package com.example.code;
 
 
-import static com.example.code.PostmanSnippet.postmanImport;
+import static org.gmjm.springrestdocspostman.PostmanSnippet.postmanImport;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

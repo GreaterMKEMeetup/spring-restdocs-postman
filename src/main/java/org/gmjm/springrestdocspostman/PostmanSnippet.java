@@ -1,4 +1,4 @@
-package com.example.code;
+package org.gmjm.springrestdocspostman;
 
 import java.io.File;
 import java.io.IOException;

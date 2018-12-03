@@ -1,5 +1,13 @@
-package com.example.code;
+package org.gmjm.springrestdocspostman;
 
+import static java.nio.file.Files.readAllBytes;
+import static org.gmjm.springrestdocspostman.PostmanSnippet.CollectionInfo;
+import static org.gmjm.springrestdocspostman.PostmanSnippet.FolderItem;
+import static org.gmjm.springrestdocspostman.PostmanSnippet.HasItems;
+import static org.gmjm.springrestdocspostman.PostmanSnippet.PostmanCollection;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,12 +17,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import static java.nio.file.Files.*;
-import static com.example.code.PostmanSnippet.*;
 
 public class PostmanCollectionGenerator {
 
