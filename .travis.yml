@@ -6,9 +6,9 @@ install:
 - true
 
 stages:
-- test
-- name: deploy
-  if: branch =~ ^draft OR tag =~ ^v
+  - test
+  - name: deploy
+    if: branch =~ ^draft OR tag =~ ^v
 
 jobs:
   include:
@@ -16,6 +16,6 @@ jobs:
     script: ./gradlew test -x signArchives
   - stage: deploy
     script:
-    - openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv -in oss_secring.gpg.enc -out oss_secring.gpg -d
-    - ./gradlew uploadArchives --stacktrace
+      - openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv -in oss_secring.gpg.enc -out oss_secring.gpg -d
+      - ./gradlew uploadArchives --stacktrace
 
