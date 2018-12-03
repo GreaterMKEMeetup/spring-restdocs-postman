@@ -16,3 +16,4 @@ jobs:
     - openssl aes-256-cbc -K $encrypted_7dc6dfcf9ba9_key -iv $encrypted_7dc6dfcf9ba9_iv
       -in oss_secring.gpg.enc -out oss_secring.gpg -d
     - "./gradlew uploadArchives"
+
